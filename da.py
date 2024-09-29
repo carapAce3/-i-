@@ -1,5 +1,3 @@
-#da
-
 from panda3d.core import Point3, Vec3
 from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
@@ -31,8 +29,8 @@ class CoinCollectionGame(ShowBase): # добавити наслідування 
             self.coins.append(coin)
             # до списку self.coins додати coin
 
-        # виправити помилку під час створення змінної в класі
-        score = 0
+        # виправити помилку під час створення змінної в класі   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        self.score = 0
         self.score_display = OnscreenText(text="Coins: 0", pos=(-1.3, 0.9), scale=0.07)
 
         self.cTrav = CoinCollectionGame() # створити об'єкт класу CollisionTraverser
@@ -56,10 +54,10 @@ class CoinCollectionGame(ShowBase): # добавити наслідування 
             self.cTrav.addCollider(self.player_coll_np, self.coin_handler)
 
         # замість "?" викликати функцію, яка відповідає за рух у даній програмі
-        self.accept("arrow_up", "self.move_player", [Vec3(0, 1, 0)])   
-        self.accept("arrow_down", "self.move_player", [Vec3(0, -1, 0)]) 
-        self.accept("arrow_left", "self.move_player", [Vec3(-1, 0, 0)])
-        self.accept("arrow_right", "self.move_player", [Vec3(1, 0, 0)]) 
+        self.accept("arrow_up", self.move_player, [Vec3(0, 1, 0)])   
+        self.accept("arrow_down", self.move_player, [Vec3(0, -1, 0)]) 
+        self.accept("arrow_left", self.move_player, [Vec3(-1, 0, 0)])
+        self.accept("arrow_right", self.move_player, [Vec3(1, 0, 0)]) 
 
         self.accept("w", "r", [Vec3(0, 0, 1)]) 
         self.accept("s", "r", [Vec3(0, 0, -1)]) 
@@ -84,8 +82,11 @@ class CoinCollectionGame(ShowBase): # добавити наслідування 
                 collided_coin.removeNode()
                 self.score += 1
                 self.update_score()
+            return Task.cont
+
                 # викликати функію update_score
-        # повернути Task.cont
+        # повернути Task.cont  !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
     # виправити помилки під час створення функції
     def update_score(self):
